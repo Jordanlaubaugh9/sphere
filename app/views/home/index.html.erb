@@ -1,12 +1,22 @@
-<h1 style="text-align: center; color: white;">SPHERE</h1>
-<div style="text-align: center; margin-top: 50px;">
-    <button style="padding: 20px 40px; font-size: 24px; background-color: #000000; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        CREATE A SPHERE
-    </button>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; color: black;">
+    <h1>SPHERE</h1>
+    <div style="margin-top: 50px;">
+        <button id="create-sphere-button" style="padding: 20px 40px; font-size: 24px; background-color: #000000; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            CREATE A SPHERE
+        </button>
+    </div>
+    <div id="message" style="margin-top: 20px; font-size: 20px; color: red;"></div>
 </div>
+
+<script>
+    document.getElementById('create-sphere-button').addEventListener('click', function() {
+        document.getElementById('message').innerText = "You really thought YOU would be allowed to create a sphere? HA!";
+    });
+</script>
+
 <style>
     body {
-        background-color: #333;
+
         color: white;
         text-align: center;
         height: 100vh;
