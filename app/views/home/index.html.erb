@@ -6,17 +6,32 @@
         </button>
     </div>
     <div id="message" style="margin-top: 20px; font-size: 20px; color: red;"></div>
+    <div id="logo-container" style="margin-top: 20px; display: none;">
+    <p>This is all we have for now. Try again later.</p>    
+    <img id="sphere-logo" src="<%= asset_path('sphere-logo.png') %>" alt="Sphere Logo" style="max-width: 40%; height: auto;" />
+    </div>
 </div>
 
 <script>
+    // Function to handle button click
     document.getElementById('create-sphere-button').addEventListener('click', function() {
-        document.getElementById('message').innerText = "You really thought YOU would be allowed to create a sphere? HA!";
+        // Show the logo and message
+        document.getElementById('logo-container').style.display = 'block';
+        document.getElementById('message').innerText = ""; // Clear any previous message
+    });
+
+    // Function to handle clicks on the document
+    document.addEventListener('click', function(event) {
+        // Check if the click is not on the button or logo container
+        if (event.target.id !== 'create-sphere-button' && event.target.id !== 'sphere-logo') {
+            document.getElementById('logo-container').style.display = 'none'; // Hide logo and message
+            document.getElementById('message').innerText = ""; // Clear any previous message
+        }
     });
 </script>
 
 <style>
     body {
-
         color: white;
         text-align: center;
         height: 100vh;
