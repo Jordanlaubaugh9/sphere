@@ -1,44 +1,53 @@
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; color: black;">
-    <h1>SPHERE</h1>
-    <div style="margin-top: 50px;">
-        <button id="create-sphere-button" style="padding: 20px 40px; font-size: 24px; background-color: #000000; color: white; border: none; border-radius: 5px; cursor: pointer;">
+<div class="flex flex-col items-center justify-center h-screen text-center text-black">
+    <h1 class="text-4xl font-bold">SPHERE</h1>
+    <div class="mt-10">
+        <button id="create-sphere-button" class="px-8 py-4 text-xl bg-black text-white rounded-lg hover:bg-gray-800">
             CREATE A SPHERE
         </button>
     </div>
-    <div id="message" style="margin-top: 20px; font-size: 20px; color: red;"></div>
-    <div id="logo-container" style="margin-top: 20px; display: none;">
-    <p>This is all we have for now. Try again later.</p>    
-    <img id="sphere-logo" src="<%= asset_path('sphere-logo.png') %>" alt="Sphere Logo" style="max-width: 40%; height: auto;" />
+    <div id="message" class="mt-5 text-lg text-red-500"></div>
+    
+    <!-- Modal for creating a Sphere -->
+    <div id="create-sphere-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-2xl font-semibold">Create a Sphere</h2>
+            <form id="create-sphere-form" action="<%= spheres_path %>" method="post">
+                <%= csrf_meta_tags %>
+                <div class="mt-4">
+                    <label for="sphere_created_by" class="block text-sm font-medium text-gray-700">Your Name:</label>
+                    <input type="text" name="sphere[created_by]" id="sphere_created_by" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500" />
+                </div>
+                <div class="mt-4">
+                    <label for="sphere_name" class="block text-sm font-medium text-gray-700">Sphere Name:</label>
+                    <input type="text" name="sphere[name]" id="sphere_name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500" />
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Create Sphere</button>
+                    <button type="button" onclick="document.getElementById('create-sphere-modal').classList.add('hidden')" class="px-4 py-2 bg-gray-300 text-black rounded-md hover:bg-gray-400">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="logo-container" class="mt-5 hidden">
+        <img id="sphere-logo" src="<%= asset_path('sphere-logo.png') %>" alt="Sphere Logo" class="max-w-full h-auto" />
+        <p class="mt-2">This is the best we can do for now. Try again later.</p>
     </div>
 </div>
 
 <script>
     // Function to handle button click
     document.getElementById('create-sphere-button').addEventListener('click', function() {
-        // Show the logo and message
-        document.getElementById('logo-container').style.display = 'block';
-        document.getElementById('message').innerText = ""; // Clear any previous message
+        document.getElementById('create-sphere-modal').classList.remove('hidden'); // Show the modal
     });
 
     // Function to handle clicks on the document
     document.addEventListener('click', function(event) {
         // Check if the click is not on the button or logo container
         if (event.target.id !== 'create-sphere-button' && event.target.id !== 'sphere-logo') {
-            document.getElementById('logo-container').style.display = 'none'; // Hide logo and message
+            document.getElementById('logo-container').classList.add('hidden'); // Hide logo and message
             document.getElementById('message').innerText = ""; // Clear any previous message
         }
     });
 </script>
 
-<style>
-    body {
-        color: white;
-        text-align: center;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-    }
-</style>

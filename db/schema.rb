@@ -10,5 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_31_034444) do
+  create_table "sphere_memberships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "sphere_id", null: false
+    t.string "role"
+    t.datetime "last_active_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sphere_id"], name: "index_sphere_memberships_on_sphere_id"
+    t.index ["user_id"], name: "index_sphere_memberships_on_user_id"
+  end
+
+  create_table "spheres", force: :cascade do |t|
+    t.integer "created_by_id", null: false
+    t.string "name"
+    t.string "slug"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_spheres_on_created_by_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "sphere_memberships", "spheres"
+  add_foreign_key "sphere_memberships", "users"
+  add_foreign_key "spheres", "users", column: "created_by_id"
 end

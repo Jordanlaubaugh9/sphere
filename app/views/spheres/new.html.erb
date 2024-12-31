@@ -1,0 +1,15 @@
+   <h1>Create a Sphere</h1>
+
+   <%= form_with model: @sphere, local: true do |form| %>
+     <div>
+       <%= form.label :name, "Sphere Name" %>
+       <%= form.text_field :name %>
+     </div>
+     <div>
+       <%= form.label :created_by, "Your Name" %>
+       <%= form.text_field :created_by %>
+     </div>
+     <div>
+       <%= form.submit "Create Sphere" %>
+     </div>
+   <% end %>
