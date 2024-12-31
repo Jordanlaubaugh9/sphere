@@ -65,8 +65,9 @@
 
     // Handle form submission with Turbo
     document.addEventListener('turbo:submit-end', (event) => {
-        if (event.detail.success) {
-            modal.classList.add('hidden');
+        const response = event.detail.fetchResponse;
+        if (response.redirected) {
+            Turbo.visit(response.response.url);
         }
     });
 </script>
