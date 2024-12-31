@@ -21,7 +21,7 @@
 
   <body>
   <% if notice %>
-         <div class="toast toast-top toast-end">
+         <div class="toast toast-top toast-end" id="notice-toast">
            <div class="alert alert-success">
              <span><%= notice %></span>
            </div>
@@ -29,12 +29,26 @@
        <% end %>
        
        <% if alert %>
-         <div class="toast toast-top toast-end">
+         <div class="toast toast-top toast-end" id="alert-toast">
            <div class="alert alert-error">
              <span><%= alert %></span>
            </div>
          </div>
        <% end %>
     <%= yield %>
+
+    <script>
+      // Automatically hide toast messages after 2 seconds
+      setTimeout(() => {
+        const noticeToast = document.getElementById('notice-toast');
+        const alertToast = document.getElementById('alert-toast');
+        if (noticeToast) {
+          noticeToast.style.display = 'none';
+        }
+        if (alertToast) {
+          alertToast.style.display = 'none';
+        }
+      }, 2000);
+    </script>
   </body>
 </html>
